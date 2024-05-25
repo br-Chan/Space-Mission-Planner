@@ -4,9 +4,9 @@ import main.missiondetails.MissionDetails;
 
 public class MissionFactory {
 
-    public static Mission createMission(String type, MissionDetails missionDetails) {
-        switch (type) {
-            case "Lunar":
+    public static Mission createMission(MissionDetails missionDetails) {
+        switch (missionDetails.getDestination()) {
+            case "Moon":
                 return new LunarMission(missionDetails);
             
             case "Mars":

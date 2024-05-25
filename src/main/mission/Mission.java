@@ -10,6 +10,10 @@ public abstract class Mission implements Prototype {
         this.missionDetails = missionDetails;
     }
 
+    public MissionDetails getMissionDetails() {
+        return missionDetails;
+    }
+
     public abstract String getDetails();
 
     public abstract Prototype copy();
