@@ -8,7 +8,7 @@ public class MarsMission extends Mission {
 
     public MarsMission(MissionDetails missionDetails) {
         super(missionDetails);
-        rocksSampled = 0;
+        this.rocksSampled = 0;
     }
 
     public int getRocksSampled() {

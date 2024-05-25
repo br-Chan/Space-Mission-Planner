@@ -1,5 +1,9 @@
 package main;
 
+import main.adapters.LunarToMarsAdapter;
+import main.adapters.MarsToLunarAdapter;
+import main.mission.LunarMission;
+import main.mission.MarsMission;
 import main.mission.Mission;
 import main.mission.MissionFactory;
 import main.missiondetails.MissionDetails;
@@ -16,16 +20,39 @@ public class Main {
                         .addRobot("Sparky")
                         .build());
 
-        // Using Prototype Pattern
-        Mission clonedLunarMission = (Mission) lunarMission.copy();
-        Mission clonedMarsMission = (Mission) marsMission.copy();
-
         System.out.println("Factory and Builder Pattern:");
         System.out.println(lunarMission.getMissionDetails());
         System.out.println(marsMission.getMissionDetails());
 
-        System.out.println("\nPrototype Pattern:");
-        System.out.println("Cloned " + clonedLunarMission.getMissionDetails());
-        System.out.println("Cloned " + clonedMarsMission.getMissionDetails());
+        // Using Prototype and Adapter Pattern
+        Mission clonedLunarMission = (Mission) lunarMission.copy();
+        Mission clonedMarsMission = (Mission) marsMission.copy();
+
+        System.out.println("\nPrototype and Adapter Pattern:");
+        System.out.println("\nCloned " + clonedLunarMission.getMissionDetails());
+        LunarToMarsAdapter lunarToMars = new LunarToMarsAdapter();
+        Mission convertedMarsMission = lunarToMars.convert(clonedLunarMission);
+        System.out.println(convertedMarsMission.getMissionDetails());
+        System.out.println(clonedLunarMission.getClass() + " " + convertedMarsMission.getClass());
+
+        System.out.println("\nCloned " + clonedMarsMission.getMissionDetails());
+        MarsToLunarAdapter marsToLunar = new MarsToLunarAdapter();
+        Mission convertedLunarMission = marsToLunar.convert(clonedMarsMission);
+        System.out.println(convertedLunarMission.getMissionDetails());
+
+
+
+        // // Composite Pattern
+        // System.out.println("\nComposite Pattern:");
+        // CrewMember commander = new CrewMember("John Doe", "Commander", 1);
+        // CrewMember engineer = new CrewMember("Jane Smith", "Engineer", 2);
+        // Robot robot = new Robot("Robo1", "Sampling");
+
+        // MissionComposite missionTeam = new MissionComposite();
+        // missionTeam.add(commander);
+        // missionTeam.add(engineer);
+        // missionTeam.add(robot);
+
+        // missionTeam.displayDetails();
     }
 }
