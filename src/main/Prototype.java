@@ -1,6 +1,6 @@
 package main;
 public interface Prototype {
 
-    public Prototype clone();
+    public Prototype copy();
 
 }

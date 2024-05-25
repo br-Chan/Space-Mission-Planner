@@ -1,13 +1,13 @@
 package main;
 
 import main.mission.Mission;
+import main.mission.MissionFactory;
 
 public class Main {
     public static void main(String[] args) {
         // Using Factory Pattern
-        MissionFactory missionFactory = new MissionFactory();
-        Mission lunarMission = missionFactory.createMission("Lunar");
-        Mission marsMission = missionFactory.createMission("Mars");
+        Mission lunarMission = MissionFactory.createMission("Lunar");
+        Mission marsMission = MissionFactory.createMission("Mars");
 
         System.out.println("Factory Pattern:");
         System.out.println(lunarMission.getDetails());
@@ -34,8 +34,8 @@ public class Main {
         System.out.println(marsMissionDetails);
 
         // Using Prototype Pattern
-        Mission clonedLunarMission = lunarMission.clone();
-        Mission clonedMarsMission = marsMission.clone();
+        Mission clonedLunarMission = (Mission) lunarMission.copy();
+        Mission clonedMarsMission = (Mission) marsMission.copy();
 
         System.out.println("\nPrototype Pattern:");
         System.out.println("Cloned " + clonedLunarMission.getDetails());

@@ -2,7 +2,7 @@ package main.mission;
 
 import main.Prototype;
 
-public class MarsMission extends Mission implements Prototype {
+public class MarsMission extends Mission {
 
     @Override
     public String getDetails() {
@@ -10,7 +10,7 @@ public class MarsMission extends Mission implements Prototype {
     }
 
     @Override
-    public Prototype clone() {
+    public Prototype copy() {
         return new MarsMission();
     }
 

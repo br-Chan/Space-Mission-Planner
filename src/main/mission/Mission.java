@@ -1,7 +1,11 @@
 package main.mission;
 
-public abstract class Mission {
+import main.Prototype;
+
+public abstract class Mission implements Prototype {
 
     public abstract String getDetails();
+
+    public abstract Prototype copy();
 
 }
