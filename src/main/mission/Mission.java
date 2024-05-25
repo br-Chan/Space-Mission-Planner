@@ -14,8 +14,6 @@ public abstract class Mission implements Prototype {
         return missionDetails;
     }
 
-    public abstract String getDetails();
-
     public abstract Prototype copy();
 
 }

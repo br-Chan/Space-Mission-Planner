@@ -5,6 +5,7 @@ import main.missiondetails.MissionDetails;
 
 public class MarsMission extends Mission {
     private int rocksSampled;
+    // Could initialise an arraylist of rocks. Could create a Rock class.
 
     public MarsMission(MissionDetails missionDetails) {
         super(missionDetails);
@@ -17,11 +18,6 @@ public class MarsMission extends Mission {
 
     public void logRockSample() {
         rocksSampled++;
-    }
-
-    @Override
-    public String getDetails() {
-        return "Mars Mission";
     }
 
     @Override
