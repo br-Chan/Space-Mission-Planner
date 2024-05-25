@@ -2,6 +2,9 @@ package main;
 
 import main.adapters.LunarToMarsAdapter;
 import main.adapters.MarsToLunarAdapter;
+import main.composite.CrewMember;
+import main.composite.Robot;
+import main.composite.TeamComposite;
 import main.mission.LunarMission;
 import main.mission.MarsMission;
 import main.mission.Mission;
@@ -24,35 +27,42 @@ public class Main {
         System.out.println(lunarMission.getMissionDetails());
         System.out.println(marsMission.getMissionDetails());
 
+
         // Using Prototype and Adapter Pattern
-        Mission clonedLunarMission = (Mission) lunarMission.copy();
         Mission clonedMarsMission = (Mission) marsMission.copy();
 
         System.out.println("\nPrototype and Adapter Pattern:");
-        System.out.println("\nCloned " + clonedLunarMission.getMissionDetails());
-        LunarToMarsAdapter lunarToMars = new LunarToMarsAdapter();
-        Mission convertedMarsMission = lunarToMars.convert(clonedLunarMission);
-        System.out.println(convertedMarsMission.getMissionDetails());
-        System.out.println(clonedLunarMission.getClass() + " " + convertedMarsMission.getClass());
-
-        System.out.println("\nCloned " + clonedMarsMission.getMissionDetails());
+        System.out.println("\nCloned: " + clonedMarsMission.getMissionDetails());
         MarsToLunarAdapter marsToLunar = new MarsToLunarAdapter();
         Mission convertedLunarMission = marsToLunar.convert(clonedMarsMission);
-        System.out.println(convertedLunarMission.getMissionDetails());
+        System.out.println("\nThen Converted: " + convertedLunarMission.getMissionDetails());
 
 
 
-        // // Composite Pattern
-        // System.out.println("\nComposite Pattern:");
-        // CrewMember commander = new CrewMember("John Doe", "Commander", 1);
-        // CrewMember engineer = new CrewMember("Jane Smith", "Engineer", 2);
-        // Robot robot = new Robot("Robo1", "Sampling");
+        // Composite Pattern
+        System.out.println("\nComposite Pattern:");
+        CrewMember commander1 = new CrewMember("John Doe", "Commander", 1);
+        CrewMember engineer1 = new CrewMember("Jane Smith", "Engineer", 2);
+        CrewMember engineer2 = new CrewMember("John Smith", "Engineer", 4);
+        CrewMember engineer3 = new CrewMember("Calico Shmalico", "Engineer", 4);
+        CrewMember engineer4 = new CrewMember("Henry Ly", "Engineer", 3);
+        CrewMember engineer5 = new CrewMember("Brandon Chan", "Engineer", 5);
+        CrewMember engineer6 = new CrewMember("Fred Oktopus", "Engineer", 5);
+        Robot robot1 = new Robot("Vision", "Advisor", "A113");
 
-        // MissionComposite missionTeam = new MissionComposite();
-        // missionTeam.add(commander);
-        // missionTeam.add(engineer);
-        // missionTeam.add(robot);
+        TeamComposite committee = new TeamComposite("Master Commander Committee");
+        committee.addEntity(commander1);
+        committee.addEntity(engineer1);
+        committee.addEntity(robot1);
 
-        // missionTeam.displayDetails();
+        TeamComposite engineering = new TeamComposite("Engineering Division");
+        engineering.addEntity(engineer1);
+        engineering.addEntity(engineer2);
+        engineering.addEntity(engineer3);
+        engineering.addEntity(engineer4);
+        engineering.addEntity(engineer5);
+        engineering.addEntity(engineer6);
+
+        committee.displayDetails();
     }
 }
