@@ -1,8 +1,13 @@
 package main.mission;
 
 import main.Prototype;
+import main.missiondetails.MissionDetails;
 
 public class MarsMission extends Mission {
+
+    public MarsMission(MissionDetails missionDetails) {
+        super(missionDetails);
+    }
 
     @Override
     public String getDetails() {
@@ -11,7 +16,7 @@ public class MarsMission extends Mission {
 
     @Override
     public Prototype copy() {
-        return new MarsMission();
+        return new MarsMission(missionDetails);
     }
 
 }

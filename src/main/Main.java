@@ -2,36 +2,27 @@ package main;
 
 import main.mission.Mission;
 import main.mission.MissionFactory;
+import main.missiondetails.MissionDetails;
 
 public class Main {
     public static void main(String[] args) {
-        // Using Factory Pattern
-        Mission lunarMission = MissionFactory.createMission("Lunar");
-        Mission marsMission = MissionFactory.createMission("Mars");
+        // Using Factory Pattern and Builder Pattern
+        Mission lunarMission = MissionFactory.createMission(
+                "Lunar",
+                new MissionDetails.Builder("Aloppo 11", 8, "Tasurn V")
+                        .setCrewSize(3)
+                        .build()
+        );
+        Mission marsMission = MissionFactory.createMission(
+                "Mars",
+                new MissionDetails.Builder("Mars One", 180, "Orion")
+                        .addRobot("TARS-4612")
+                        .build()
+        );
 
         System.out.println("Factory Pattern:");
         System.out.println(lunarMission.getDetails());
         System.out.println(marsMission.getDetails());
-
-        // Using Builder Pattern
-        MissionBuilder builder = new MissionBuilder();
-        MissionDetails lunarMissionDetails = builder
-                .setName("Apollo 11")
-                .setDuration(8)
-                .setSpacecraft("Saturn V")
-                .setCrewSize(3)
-                .build();
-
-        MissionDetails marsMissionDetails = builder
-                .setName("Mars One")
-                .setDuration(180)
-                .setSpacecraft("Orion")
-                .setCrewSize(6)
-                .build();
-
-        System.out.println("\nBuilder Pattern:");
-        System.out.println(lunarMissionDetails);
-        System.out.println(marsMissionDetails);
 
         // Using Prototype Pattern
         Mission clonedLunarMission = (Mission) lunarMission.copy();
