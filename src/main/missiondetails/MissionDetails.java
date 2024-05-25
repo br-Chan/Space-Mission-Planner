@@ -40,7 +40,7 @@ public class MissionDetails {
         return crewSize;
     }
 
-    public boolean isHasRobot() {
+    public boolean hasRobot() {
         return hasRobot;
     }
 

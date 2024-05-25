@@ -1,6 +1,5 @@
 package main.mission;
 
-import main.Prototype;
 import main.missiondetails.MissionDetails;
 
 public class MarsMission extends Mission {
@@ -22,7 +21,10 @@ public class MarsMission extends Mission {
 
     @Override
     public Prototype copy() {
-        return new MarsMission(missionDetails);
+        return new LunarMission(new MissionDetails.Builder(missionDetails.getName(), missionDetails.getDestination(), missionDetails.getDuration(), missionDetails.getSpacecraft())
+        .setCrewSize(missionDetails.getCrewSize())
+        .addRobot(missionDetails.getRobotName())
+        .build());
     }
 
 }

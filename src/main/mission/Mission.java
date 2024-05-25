@@ -1,6 +1,5 @@
 package main.mission;
 
-import main.Prototype;
 import main.missiondetails.MissionDetails;
 
 public abstract class Mission implements Prototype {
