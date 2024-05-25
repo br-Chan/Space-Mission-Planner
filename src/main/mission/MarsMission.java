@@ -1,3 +1,7 @@
+package main.mission;
+
+import main.Prototype;
+
 public class MarsMission extends Mission implements Prototype {
 
     @Override

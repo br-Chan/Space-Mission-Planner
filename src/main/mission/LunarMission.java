@@ -1,3 +1,7 @@
+package main.mission;
+
+import main.Prototype;
+
 public class LunarMission extends Mission implements Prototype {
 
     @Override
