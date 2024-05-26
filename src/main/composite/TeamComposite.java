@@ -1,6 +1,7 @@
 package main.composite;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.swing.text.html.parser.Entity;
@@ -11,7 +12,11 @@ public class TeamComposite implements EntityElement {
 
     public TeamComposite(String name) {
         this.name = name;
-        entitySet = new HashSet<>();
+        entitySet = new LinkedHashSet<>();
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void addEntity(EntityElement entity) {
@@ -20,6 +25,20 @@ public class TeamComposite implements EntityElement {
 
     public void removeEntity(EntityElement entity) {
         entitySet.remove(entity);
+    }
+
+    public Set<EntityElement> getPeople() {
+        Set<EntityElement> set = new HashSet<>();
+        for (EntityElement entity : entitySet) {
+            if (entity instanceof CrewMember || entity instanceof Robot) {
+                set.add(entity);
+            }
+            else {
+                set.addAll(((TeamComposite)entity).getPeople());
+            }
+        }
+
+        return set;
     }
 
     @Override
@@ -35,12 +54,6 @@ public class TeamComposite implements EntityElement {
 
     @Override
     public int getSize() {
-        int size = 0;
-
-        for (EntityElement entity : entitySet) {
-            size += entity.getSize();
-        }
-
-        return size;
+        return getPeople().size();
     }
 }

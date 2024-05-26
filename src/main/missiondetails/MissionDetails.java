@@ -1,22 +1,24 @@
 package main.missiondetails;
 
+import main.composite.TeamComposite;
+
 public class MissionDetails {
     private String name; // mandatory
     private String destination; // mandatory
     private int duration; // mandatory
     private String spacecraft; // mandatory
-    private int crewSize = 0; // optional with default value
-    private boolean hasRobot = false; // optional with default value
-    private String robotName; // optional with default value
+    private TeamComposite missionTeam; // mandatory
+    private boolean returnTrip; // optional
+    private int thrusters;
 
     private MissionDetails(Builder builder) {
         this.name = builder.name;
         this.destination = builder.destination;
         this.duration = builder.duration;
         this.spacecraft = builder.spacecraft;
-        this.crewSize = builder.crewSize;
-        this.hasRobot = builder.hasRobot;
-        this.robotName = builder.robotName;
+        this.missionTeam = builder.missionTeam;
+        this.returnTrip = builder.returnTrip;
+        this.thrusters = builder.thrusters;
         
     }
 
@@ -37,41 +39,50 @@ public class MissionDetails {
     }
 
     public int getCrewSize() {
-        return crewSize;
+        return missionTeam.getSize();
+    }
+    
+    public TeamComposite getMissionTeam() {
+        return missionTeam;
     }
 
-    public boolean hasRobot() {
-        return hasRobot;
+    public boolean hasReturnTrip() {
+        return returnTrip;
     }
 
-    public String getRobotName() {
-        return robotName;
+    public void addReturnTrip() {
+        returnTrip = true;
     }
+
+    public int getThrusters() {
+        return thrusters;
+    }
+
 
     public static class Builder {
         private String name; // mandatory
         private String destination; // mandatory
         private int duration; // mandatory
         private String spacecraft; // mandatory
-        private int crewSize = 0; // optional with default value
-        private boolean hasRobot = false; // optional with default value
-        private String robotName; // optional with default value
+        private TeamComposite missionTeam; // mandatory
+        private boolean returnTrip = false; // optional
+        private int thrusters = 1; // optional
 
-        public Builder (String name, String destination, int duration, String spacecraft) {
+        public Builder (String name, String destination, int duration, String spacecraft, TeamComposite missionTeam) {
             this.name = name;
             this.destination = destination;
             this.duration = duration;
             this.spacecraft = spacecraft;
+            this.missionTeam = missionTeam;
         }
 
-        public Builder setCrewSize(int crewSize) {
-            this.crewSize = crewSize;
+        public Builder addReturnTrip() {
+            returnTrip = true;
             return this;
         }
 
-        public Builder addRobot(String robotName) {
-            this.hasRobot = true;
-            this.robotName = robotName;
+        public Builder addThrusters(int n) {
+            thrusters += n;
             return this;
         }
 
@@ -81,12 +92,15 @@ public class MissionDetails {
 
     }
 
+
     @Override
     public String toString() {
         return "MissionDetails [name=" + name + ", destination=" + destination + ", duration=" + duration
-                + ", spacecraft=" + spacecraft + ", crewSize=" + crewSize + ", hasRobot=" + hasRobot + ", robotName="
-                + robotName + "]";
+                + ", spacecraft=" + spacecraft + ", missionTeam=" + missionTeam.getName() + ", returnTrip=" + returnTrip
+                + ", thrusters=" + thrusters + "]";
     }
+
+
 
     
 

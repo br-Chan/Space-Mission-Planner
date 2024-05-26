@@ -1,5 +1,6 @@
 package main.adapters;
 
+import main.mission.LunarMission;
 import main.mission.MarsMission;
 import main.mission.Mission;
 import main.missiondetails.MissionDetails;
@@ -10,18 +11,13 @@ public class MarsToLunarAdapter implements Converter {
     public Mission convert(Mission mission) {
         MissionDetails missionDetails = mission.getMissionDetails();
 
-        Mission marsMission = new MarsMission(
-                new MissionDetails.Builder(
-                        missionDetails.getName(),
-                        "Moon",
-                        missionDetails.getDuration(),
-                        missionDetails.getSpacecraft()
-                )
-                        .addRobot(missionDetails.getRobotName())
-                        .build()
-        );
+        Mission lunarMission = new LunarMission(new MissionDetails.Builder(missionDetails.getName(), missionDetails.getDestination(), missionDetails.getDuration(), missionDetails.getSpacecraft(), missionDetails.getMissionTeam())
+        .addThrusters(missionDetails.getThrusters() - 1)
+        .build());
 
-        return marsMission;
+        if (mission.getMissionDetails().hasReturnTrip()) mission.getMissionDetails().addReturnTrip();
+
+        return lunarMission;
     }
 
 }

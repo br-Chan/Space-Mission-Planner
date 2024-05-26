@@ -10,10 +10,13 @@ public class LunarMission extends Mission {
 
     @Override
     public Prototype copy() {
-        return new LunarMission(new MissionDetails.Builder(missionDetails.getName(), missionDetails.getDestination(), missionDetails.getDuration(), missionDetails.getSpacecraft())
-        .setCrewSize(missionDetails.getCrewSize())
-        .addRobot(missionDetails.getRobotName())
+        Mission mission = new LunarMission(new MissionDetails.Builder(missionDetails.getName(), missionDetails.getDestination(), missionDetails.getDuration(), missionDetails.getSpacecraft(), missionDetails.getMissionTeam())
+        .addThrusters(missionDetails.getThrusters() - 1)
         .build());
+
+        if (mission.getMissionDetails().hasReturnTrip()) mission.getMissionDetails().addReturnTrip();
+
+        return mission;
     }
 
 }

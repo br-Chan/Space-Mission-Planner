@@ -10,16 +10,11 @@ public class LunarToMarsAdapter implements Converter {
     public Mission convert(Mission mission) {
         MissionDetails missionDetails = mission.getMissionDetails();
 
-        Mission marsMission = new MarsMission(
-                new MissionDetails.Builder(
-                        missionDetails.getName(),
-                        "Mars",
-                        missionDetails.getDuration(),
-                        missionDetails.getSpacecraft()
-                )
-                        .addRobot(missionDetails.getRobotName())
-                        .build()
-        );
+        Mission marsMission = new MarsMission(new MissionDetails.Builder(missionDetails.getName(), missionDetails.getDestination(), missionDetails.getDuration(), missionDetails.getSpacecraft(), missionDetails.getMissionTeam())
+        .addThrusters(missionDetails.getThrusters() - 1)
+        .build());
+
+        if (mission.getMissionDetails().hasReturnTrip()) mission.getMissionDetails().addReturnTrip();
 
         return marsMission;
     }
